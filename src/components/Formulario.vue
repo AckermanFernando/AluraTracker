@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="columns">
+    <div class="columns is-flex is-align-items-center">
       <div
         class="column is-8"
         role="form"
@@ -9,62 +9,79 @@
         <input
           type="text"
           class="input"
+          v-model="newTarefa"
           placeholder="Qual tarefa você deseja iniciar?"
         />
       </div>
       <div class="column">
-        <div
-          class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-          <section>
-            <strong>{{ tempoDecorrido }}</strong>
-          </section>
-          <button class="button" @click="iniciar">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="finalizar">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <Temporizador @aoTemporizadorFinalizado="finalizarTarefa" />
+        <!-- <Temporizador /> -->
       </div>
+
+      <!-- <button class="button button-blue" @click="novaTarefa">Cadastrar</button> -->
     </div>
+  </div>
+  <div v-if="modal">
+    <Alert />
+  </div>
+  <div class="column" v-if="this.tarefas">
+    <ul>
+      <li v-for="tarefa in tarefas" v-bind:key="tarefa.title">
+        <Tarefa :titulo="tarefa.titulo" :tempo="tarefa.tempo" />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Temporizador from "./Temporizador.vue";
+import Tarefa from "./Tarefa.vue";
+import Alert from "./Alert.vue"
+// import Cronometro from "./Cronometro.vue";
 
 export default defineComponent({
   name: "Formulario",
   data() {
     return {
-      tempoEmSegundos: 0,
-      cronometro: 0
+      newTarefa: "",
+      tempoEmSegundos: "",
+      tarefas: [] as any,
+      modal: "",
     };
   },
-  computed:{
-      tempoDecorrido() : string {
-          return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11,8)
-      }
+  components: {
+    Temporizador,
+    Tarefa,
+    Alert,
+    //Cronometro,
   },
   methods: {
-    iniciar() {
-      this.cronometro = setInterval(() => {
-            this.tempoEmSegundos++
-      }, 1000);
+    finalizarTarefa(tempoDecorrido: number): void {
+      if (this.newTarefa != "") {
+        this.tarefas.push({
+          titulo: this.newTarefa,
+          tempo: tempoDecorrido,
+        });
+        this.newTarefa = "";
+        console.log(this.tarefas);
+      } else {
+        this.modal = "is-active";
+        setTimeout(() => {
+          this.modal = "";
+        }, 4000);
+      }
     },
-
-    finalizar() {
-        clearInterval(this.cronometro)
-    },
+  },
+  mounted() {
+    console.log(this.tarefas);
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.button-blue {
+  background-color: #0d3b66;
+  color: #fff;
+}
+</style>
