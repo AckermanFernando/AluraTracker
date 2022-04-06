@@ -1,53 +1,43 @@
 <template>
-  <div class="card">
+<!-- <div class="box ">
+  <div class="columns">
+    <div class="column is-7">{{titulo}}</div>
+    <div class="column"> <Cronometro :tempoEmSegundos="this.tempo"/></div>
+  </div>
+</div> -->
+  <div class="card tarefa">
     <header class="card-header is-align-items-center">
       <div class="card-header-title column is-two-fifths">
-        {{ titulo }}
+        {{ tarefa.descricao }}
       </div>
-      <!-- <div class="card-header-title column is-one-quarter">
-        outra coisa
-      </div> -->
       <div class="card-header-title is-one-quarter is-justify-content-end">
-        <Cronometro :tempoEmSegundos="this.tempo"/>
+        <Cronometro :tempoEmSegundos="tarefa.duracaoEmSegundos"/>
       </div>
     </header>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import ITarefa from "@/interfaces/ITarefa";
+import { defineComponent, PropType } from "vue";
 import Cronometro from "./Cronometro.vue"
-// import Temporizador from "./Temporizador.vue";
 
 export default defineComponent({
   name: "Tarefa",
   components: {
     Cronometro
-    // Temporizador,
   },
   props:{
-      titulo:{
-          type: String,
-          default: ''
-      },
-      tempo: {
-          type: Number,
-          default: 0
+      tarefa: {
+        type: Object as PropType<ITarefa>,
+        required: true
       }
   },
-// '   data() {
-//      return {
-//        titulo1: this.titulo,
-//      };
-//    },'
-//   methods:{
-//       criarTarefa(titulo: string, tempo: number){
-//         const novaTarefa = new Temporizador(titulo, tempo)
-//       }
-//   }
 });
 </script>
 
 <style scoped>
-
+/* .tarefa{
+  background: #f6d684;
+} */
 </style>
