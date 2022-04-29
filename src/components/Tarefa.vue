@@ -37,7 +37,4 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* .tarefa{
-  background: #f6d684;
-} */
 </style>
