@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box formulario">
     <div class="columns is-flex is-align-items-center">
       <div
         class="column is-8"
@@ -65,9 +65,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style >
 .button-blue {
   background-color: #0d3b66;
   color: #fff;
+}
+.formulario{
+  color: var(--texto-primario);
+  background-color: var(--bg-primario);
 }
 </style>

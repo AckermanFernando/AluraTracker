@@ -1,9 +1,9 @@
 <template>
-  <main class="columns is-gapless is-multiline">
+  <main class="columns is-gapless is-multiline" :class="this.modoNoturno">
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @AlternarModo="alternarModo"/>
     </div>
-    <div class="column is-three-quarter">
+    <div class="column is-three-quarter conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div>
         <ul>
@@ -41,6 +41,7 @@ export default defineComponent({
   },
   data() {
     return {
+      modoNoturno: '',
       tarefas:[] as ITarefa[],
       // tarefas: [{
       //   duracaoEmSegundos: 120,
@@ -99,6 +100,12 @@ export default defineComponent({
     salvarTarefa(tarefa: ITarefa) {
       this.tarefas.push(tarefa);
     },
+    alternarModo(){
+      this.modoNoturno ? this.modoNoturno = '' : this.modoNoturno = 'modo-escuro'
+      // if (this.modoNoturno){
+      //   this.modoNoturno = 'modo-escuro' 
+      // }
+    }
   },
 });
 </script>
@@ -109,5 +116,16 @@ export default defineComponent({
 }
 .tela-vazia {
   padding: 1.5rem;
+}
+.main {
+ --bg-primario: #fff;
+ --texto-primario: #000;
+}
+main.modo-escuro{
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+.conteudo{
+  background-color: var(--bg-primario);
 }
 </style>

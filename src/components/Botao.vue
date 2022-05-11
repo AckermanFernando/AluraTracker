@@ -26,7 +26,6 @@ export default defineComponent({
     },
     descricao: {
       type: String,
-      default: "play",
     },
   },
 });
