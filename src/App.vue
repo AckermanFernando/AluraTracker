@@ -1,5 +1,5 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="this.modoNoturno">
+  <main class="columns is-gapless is-multiline" :class="{'modo-escuro' : this.modoNoturno}">
     <div class="column is-one-quarter">
       <BarraLateral @AlternarModo="alternarModo"/>
     </div>
@@ -41,7 +41,7 @@ export default defineComponent({
   },
   data() {
     return {
-      modoNoturno: '',
+      modoNoturno: false,
       tarefas:[] as ITarefa[],
       // tarefas: [{
       //   duracaoEmSegundos: 120,
@@ -101,7 +101,7 @@ export default defineComponent({
       this.tarefas.push(tarefa);
     },
     alternarModo(){
-      this.modoNoturno ? this.modoNoturno = '' : this.modoNoturno = 'modo-escuro'
+      this.modoNoturno ? this.modoNoturno = false : this.modoNoturno = true
       // if (this.modoNoturno){
       //   this.modoNoturno = 'modo-escuro' 
       // }
