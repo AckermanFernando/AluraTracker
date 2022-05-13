@@ -1,10 +1,4 @@
 <template>
-<!-- <div class="box ">
-  <div class="columns">
-    <div class="column is-7">{{titulo}}</div>
-    <div class="column"> <Cronometro :tempoEmSegundos="this.tempo"/></div>
-  </div>
-</div> -->
   <div class="card tarefa">
     <header class="card-header is-align-items-center">
       <div class="card-header-title column is-two-fifths">

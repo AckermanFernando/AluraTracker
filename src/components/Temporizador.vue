@@ -2,18 +2,6 @@
   <div class="is-flex is-align-items-center is-justify-content-space-between">
     <Cronometro :tempoEmSegundos="tempoEmSegundos" />
     <Botao  @click="iniciar" :disabled="cronometroRodando" descricao="play"/>
-    <!-- <button class="button is-success is-inverted " @click="iniciar" :disabled="cronometroRodando">
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button> -->
-    <!-- <button class="button is-danger is-inverted" @click="finalizar" :disabled="!cronometroRodando">
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button> -->
     <Botao :estilo="'is-danger is-inverted'" :icone="'fas fa-stop'" :descricao="'stop'" @click="finalizar" :disabled="!cronometroRodando"/>
   </div>
 </template>

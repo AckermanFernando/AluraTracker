@@ -18,15 +18,15 @@
       </div>
     </div>
   </div>
-  <div v-if="modal">
+  <!-- <div v-if="modal">
     <Alert />
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Temporizador from "./Temporizador.vue";
-import Alert from "./Alert.vue"
+// import Alert from "./Alert.vue"
 
 export default defineComponent({
   name: "Formulario",
@@ -35,32 +35,25 @@ export default defineComponent({
     return {
       newTarefa: "",
       tempoEmSegundos: "",
-      tarefas: [] as any,
-      modal: false
+      modal: false,
+      quantidadeDeTarefas: 0
     };
   },
   components: {
     Temporizador,
-    Alert,
+    // Alert,
     //Cronometro,
   },
   methods: {
     finalizarTarefa(tempoDecorrido: number): void {
-
       if (this.newTarefa != "") {
-        this.$emit('aoSalvarTarefa', {duracaoEmSegundos: tempoDecorrido, descricao: this.newTarefa}), 
-        this.newTarefa = "";
-        console.log(this.tarefas);
-      } else {
-        this.modal = true;
-         setTimeout(() => {
-           this.modal = false
-         }, 4000);
+        this.$emit('aoSalvarTarefa', {duracaoEmSegundos: tempoDecorrido, descricao: this.newTarefa})
+        ++this.quantidadeDeTarefas
+     } else {
+        this.$emit('aoSalvarTarefa', {duracaoEmSegundos: tempoDecorrido, descricao: 'Tarefa ' + ++this.quantidadeDeTarefas}) 
       }
+      this.newTarefa = "";
     },
-  },
-  mounted() {
-    console.log(this.tarefas);
   },
 });
 </script>
