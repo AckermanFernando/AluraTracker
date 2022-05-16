@@ -1,5 +1,5 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="{'modo-escuro' : this.modoNoturno}">
+  <main class="columns is-gapless is-multiline main-content" :class="{'modo-escuro' : this.modoNoturno}">
     <div class="column is-one-quarter">
       <BarraLateral @AlternarModo="alternarModo"/>
     </div>
@@ -101,7 +101,7 @@ export default defineComponent({
       this.tarefas.push(tarefa);
     },
     alternarModo(){
-      this.modoNoturno ? this.modoNoturno = false : this.modoNoturno = true
+      this.modoNoturno ? (this.modoNoturno = false ) : this.modoNoturno = true
       // if (this.modoNoturno){
       //   this.modoNoturno = 'modo-escuro' 
       // }
@@ -111,6 +111,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.main-content{
+  min-height: 100vh;
+  /* height: 100vh; */
+}
 .lista {
   padding: 0.5rem;
 }
@@ -127,5 +131,6 @@ main.modo-escuro{
 }
 .conteudo{
   background-color: var(--bg-primario);
+  min-height: 100vh;
 }
 </style>
