@@ -65,7 +65,6 @@ export default defineComponent({
   methods: {
     finalizarTarefa(tempoDecorrido: number): void {
       if (this.idProjeto) {
-        console.log("id do projeto", this.idProjeto);
         this.$emit("aoSalvarTarefa", {
           duracaoEmSegundos: tempoDecorrido,
           descricao: this.newTarefa
