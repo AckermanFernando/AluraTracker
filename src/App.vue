@@ -1,48 +1,31 @@
 <template>
-  <main class="columns is-gapless is-multiline main-content" :class="{'modo-escuro' : this.modoNoturno}">
+  <main
+    class="columns is-gapless is-multiline main-content"
+    :class="{ 'modo-escuro': modoNoturno }"
+  >
     <div class="column is-one-quarter">
-      <BarraLateral @AlternarModo="alternarModo"/>
+      <BarraLateral @AlternarModo="alternarModo" />
     </div>
     <div class="column is-three-quarter conteudo">
-      <Formulario @aoSalvarTarefa="salvarTarefa" />
-      <div>
-        <ul>
-          <li
-            v-for="(tarefa, index) in tarefas"
-            v-bind:key="index"
-            class="lista"
-          >
-            <Tarefa :tarefa="tarefa" />
-          </li>
-        </ul>
-      </div>
-          <div v-if="listaEstaVazia" class="tela-vazia">
-            <TelaVazia/>
-          </div>
+      <router-view></router-view>
     </div>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import BarraLateral from "./components/BarraLateral.vue";
-import Formulario from "./components/Formulario.vue";
-import Tarefa from "./components/Tarefa.vue";
+import BarraLateral from "./components/organisms/BarraLateral.vue";
 import ITarefa from "./interfaces/ITarefa";
-import TelaVazia from "./components/TelaVazia.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     BarraLateral,
-    Formulario,
-    Tarefa,
-    TelaVazia,
   },
   data() {
     return {
       modoNoturno: false,
-      tarefas:[] as ITarefa[],
+      tarefas: [] as ITarefa[],
       // tarefas: [{
       //   duracaoEmSegundos: 120,
       //   descricao: 'Tarefa 1'
@@ -91,45 +74,32 @@ export default defineComponent({
       // ] as ITarefa[],
     };
   },
-  computed: {
-    listaEstaVazia(): boolean {
-      return this.tarefas.length === 0;
-    },
-  },
   methods: {
     salvarTarefa(tarefa: ITarefa) {
       this.tarefas.push(tarefa);
     },
-    alternarModo(){
-      this.modoNoturno ? (this.modoNoturno = false ) : this.modoNoturno = true
-      // if (this.modoNoturno){
-      //   this.modoNoturno = 'modo-escuro' 
-      // }
-    }
+    alternarModo() {
+      // this.modoNoturno ? (this.modoNoturno = false) : (this.modoNoturno = true);
+      this.modoNoturno = !this.modoNoturno;
+    },
   },
 });
 </script>
 
 <style scoped>
-.main-content{
+.main-content {
   min-height: 100vh;
   /* height: 100vh; */
 }
-.lista {
-  padding: 0.5rem;
-}
-.tela-vazia {
-  padding: 1.5rem;
-}
 .main {
- --bg-primario: #fff;
- --texto-primario: #000;
+  --bg-primario: #fff;
+  --texto-primario: #000;
 }
-main.modo-escuro{
+main.modo-escuro {
   --bg-primario: #2b2d42;
   --texto-primario: #ddd;
 }
-.conteudo{
+.conteudo {
   background-color: var(--bg-primario);
   min-height: 100vh;
 }
