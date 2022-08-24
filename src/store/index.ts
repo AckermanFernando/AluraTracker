@@ -20,6 +20,11 @@ export const store = createStore<Estado>({
       } as IProjeto;
       state.projetos.push(projeto);
     },
+    EDITA_PROJETO(state, projeto: IProjeto) {
+      state.projetos.map((item) => {
+        if (item.id == projeto.id) item.nome = projeto.nome;
+      });
+    },
   },
 });
 export function useStore(): Store<Estado> {
