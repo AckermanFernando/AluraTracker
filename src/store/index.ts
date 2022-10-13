@@ -25,6 +25,13 @@ export const store = createStore<Estado>({
         if (item.id == projeto.id) item.nome = projeto.nome;
       });
     },
+    REMOVE_PROJETO(state, projetoID: string) {
+      state.projetos.map((item, index) => {
+        if (item.id == projetoID) {
+          state.projetos.splice(index, 1);
+        }
+      });
+    },
   },
 });
 export function useStore(): Store<Estado> {
